@@ -4,7 +4,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Bugzilla Spec",
     "type": "object",
-    "required": ["api_key"],
+    "required": ["api_key", "url", "product"],
     "additionalProperties": false,
     "properties": {
       "api_key": {
@@ -14,11 +14,17 @@
         "airbyte_secret": true,
         "order": 1
       },
-      "products": {
+      "url": {
+        "title": "Bugzilla URL",
+        "type": "string",
+        "description": "Bugzilla URL",
+        "order": 2
+      },
+      "product": {
         "title": "Bugzilla Product",
         "type": "string",
         "description": "Bugzilla Product of interest",
-        "order": 2
+        "order": 3
       }
     }
   }

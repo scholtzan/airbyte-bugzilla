@@ -39,8 +39,6 @@ from airbyte_cdk.models import (
 )
 from airbyte_cdk.sources import Source
 
-URL = "https://landfill.bugzilla.org/bugzilla-5.0-branch/xmlrpc.cgi"
-
 
 class SourceBugzilla(Source):
     def check(self, logger: AirbyteLogger, config: json) -> AirbyteConnectionStatus:
@@ -57,7 +55,7 @@ class SourceBugzilla(Source):
         """
         try:
             # check if we can connect to Bugzilla
-            bzapi = bugzilla.Bugzilla(URL, api_key=config["api_key"])
+            bzapi = bugzilla.Bugzilla(config["url"], api_key=config["api_key"])
             if bzapi.logged_in:
                 return AirbyteConnectionStatus(status=Status.SUCCEEDED)
             else:
@@ -124,7 +122,7 @@ class SourceBugzilla(Source):
         :return: A generator that produces a stream of AirbyteRecordMessage contained in AirbyteMessage object.
         """
         stream_name = config["product"]
-        bzapi = bugzilla.Bugzilla(URL, api_key=config["api_key"])
+        bzapi = bugzilla.Bugzilla(config["url"], api_key=config["api_key"])
         data = {"components": bzapi.getcomponents(config["product"])}
 
         yield AirbyteMessage(
