@@ -1,0 +1,6 @@
+NEW_SOURCE_CHECKLIST.md
+.python-version
+.settings/*
+.project
+.gradle/*
+source_bugzilla.egg-info/*
